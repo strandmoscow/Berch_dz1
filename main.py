@@ -30,12 +30,12 @@ def mark_iter(n, m, states, print):
         per_ver = m[s-1]
     if print:
         print(f"After iteration №{iter} state is {states[s - 1]}.")
-    return dict(sorted(states_dict.items())), states_tr
+    return states_dict.items(), states_tr
 
 
 # Put variant
 var = 25
-n = 100
+n = 10
 
 # States and transitions
 states = ["A", "B", "C", "D", "E"]
@@ -88,6 +88,7 @@ x=[i+1 for i in range(100)]
 for i in range(0, 20):
     # myDictionary,  =
     myDictionary, pl = mark_iter(n, m, states, False)
+    print(myDictionary)
     f.write(f"{myDictionary['A']}, {myDictionary['B']}, {myDictionary['C']}, {myDictionary['D']}, {myDictionary['E']}\n")
     plt.plot(x, pl)
     # print(myDictionary)
