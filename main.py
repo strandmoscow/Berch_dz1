@@ -4,16 +4,13 @@ from random import randrange
 import matplotlib.pyplot as plt
 from collections import Counter
 from Latex.latex import make_latex
-var = 25
+
+var = 61
+group = "РК6-83б"
 n = 100
+name = "Кулагин Арсений Олегович"
+name_short = "Кулагин А.О."
 states = [i+1 for i in range(5)]
-
-
-def print_matr(m):
-    for i in range(len(m)):
-        for j in range(len(m[i])):
-            m[i][j] = round(m[i][j], 3)
-    print(m)
 
 
 def reader(var):
@@ -52,30 +49,23 @@ def marginal_probabilities(P):
     return p, [list(p) for _ in range(len(states))], list(p).count(0)!=len(p)
 
 
-
 if __name__ == "__main__":
     m = reader(var)
     p, pred_mat_per, erg=marginal_probabilities(m)
-    print("Предельная матрица переходов выглядит следующим образом:")
-    print_matr(pred_mat_per)
-    print(p)
-
-    f = open('output/table.csv', 'w', encoding="utf-8")
-    # f.write(f"{p[0]}, {p[1]}, {p[2]}, {p[3]}, {p[4]}\n")
 
     # Markov iteration
     x = [i+1 for i in range(n)]
+    dict_comp = []
+    plt.figure(figsize=(8, 4))
     plt.grid()
     plt.ylabel("Состояния")
     plt.xlabel("Переходы")
     plt.yticks(np.arange(0, len(states)+1, step=1))
     for _ in range(20):
         myDictionary, tr = mark_iter(n, m, states)
-        # f.write(f"{myDictionary['A']}, {myDictionary['B']}, {myDictionary['C']}, {myDictionary['D']}, {myDictionary['E']}\n")
+        dict_comp.append(myDictionary)
         plt.plot(x, tr, 'o--', linewidth=0.7, markeredgewidth=0.1)
 
-    plt.show()
-    f.close()
-
     # Latex file creation
-    make_latex("{" + f"{var}" + "}", "{РК6-73б}", "{Стрельченко Андрей Викторович}", "{Стрельченко А.В.}", m, p, myDictionary)
+    make_latex("{" + f"{var}" + "}", "{" + f"{group}" + "}", "{" + f"{name}" + "}", "{" + f"{name_short}" + "}", m, p, dict_comp)
+    plt.savefig('Latex/res/Images/iter.png')
