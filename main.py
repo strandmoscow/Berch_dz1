@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from Latex.latex import make_latex
 
-var = 61
-group = "РК6-83б"
+var = 39
+group = "РК6-85б"
 n = 100
-name = "Кулагин Арсений Олегович"
-name_short = "Кулагин А.О."
+name = "Киселев Сергей Андреевич"
+name_short = "Киселев С. А."
 states = [i+1 for i in range(5)]
 
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     for _ in range(20):
         myDictionary, tr = mark_iter(n, m, states)
         dict_comp.append(myDictionary)
-        plt.plot(x, tr, 'o--', linewidth=0.7, markeredgewidth=0.1)
+        plt.plot(x, tr, '-', linewidth=0.7, markeredgewidth=0.1)
 
     # Latex file creation
     make_latex("{" + f"{var}" + "}", "{" + f"{group}" + "}", "{" + f"{name}" + "}", "{" + f"{name_short}" + "}", m, p, dict_comp)
